@@ -3,12 +3,12 @@ package com.cat2client.clientapp;
 import com.cat2client.clientapp.Feign.MovieFeign;
 import com.cat2client.clientapp.Feign.ProductionCompanyFeign;
 import com.cat2client.clientapp.Feign.UserFeign;
-import com.cat2client.clientapp.Models.Category;
-import com.cat2client.clientapp.Models.Movie;
-import com.cat2client.clientapp.Models.ProductionCompany;
-import com.cat2client.clientapp.Models.User;
+import com.cat2client.clientapp.Models.*;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.stereotype.Component;
+
+import java.util.Arrays;
+import java.util.List;
 
 @Component
 public class RestClient implements CommandLineRunner {
@@ -38,9 +38,9 @@ public class RestClient implements CommandLineRunner {
        ProductionCompany deleteCompany = companyFeign.delete_company(update_company.getId());
 
        //adding a new movie
-        Category cat = new Category("Action");
-        ProductionCompany prodCompany = new ProductionCompany("Universal");
-        User onlineUser = new User("Joy", "1256");
-        Movie add_movie = movieFeign.newMovie(new Movie("Hobbs and Shaw", "Action", 0, "Original", "Paramount Studio", "123"));
+        ProductionCompany universal = companyFeign.newProductionCompany(new ProductionCompany("Universal"));
+        List<String> movieCategories = Arrays.asList("Action");
+        List<Integer> productionCompaniesIds = Arrays.asList(universal.getId());
+        Movie hobbsAndShaw = movieFeign.newMovie(add_user.getIdNumber(),new CreateMovieDto("Hobbs and Shaw", movieCategories, 90, productionCompaniesIds));
     }
 }
