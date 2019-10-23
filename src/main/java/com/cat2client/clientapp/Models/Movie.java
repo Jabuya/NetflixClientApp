@@ -1,16 +1,19 @@
 package com.cat2client.clientapp.Models;
 
+import java.util.List;
+
 public class Movie {
     private String title;
     private String slug;
-    private Category category;
+    private List<Category> category;
     private int runtime;
     private String type;
-    private ProductionCompany companies;
+    private List<ProductionCompany> companies;
     private User createdBy;
 
-    public Movie(String title, Category category, int runtime, String type, ProductionCompany companies, User createdBy) {
+    public Movie(String title, String slug, List<Category> category, int runtime, String type, List<ProductionCompany> companies, User createdBy) {
         this.title = title;
+        this.slug = slug;
         this.category = category;
         this.runtime = runtime;
         this.type = type;
@@ -38,11 +41,11 @@ public class Movie {
         this.slug = slug;
     }
 
-    public Category getCategory() {
+    public List<Category> getCategory() {
         return category;
     }
 
-    public void setCategory(Category category) {
+    public void setCategory(List<Category> category) {
         this.category = category;
     }
 
@@ -62,11 +65,11 @@ public class Movie {
         this.type = type;
     }
 
-    public ProductionCompany getCompanies() {
+    public List<ProductionCompany> getCompanies() {
         return companies;
     }
 
-    public void setCompanies(ProductionCompany companies) {
+    public void setCompanies(List<ProductionCompany> companies) {
         this.companies = companies;
     }
 
