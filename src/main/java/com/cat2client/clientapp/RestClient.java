@@ -24,23 +24,31 @@ public class RestClient implements CommandLineRunner {
 
     @Override
     public void run(String... args) throws Exception {
-        //adding a new user
+        // adding a new user
         User add_user = userFeign.newUser(new User("Wesley Jabuya", "1234"));
 
-        //adding a new production company
+        // adding a new production company
         ProductionCompany add_company = companyFeign.newProductionCompany(new ProductionCompany("Paramount Picture"));
 
-        //updating a production company details
-       add_company.setName("Paramount Studio");
-       ProductionCompany update_company = companyFeign.update_company(add_company.getId(), add_company);
+        // updating a production company details
+        add_company.setName("Paramount Studio");
+        ProductionCompany update_company = companyFeign.update_company(add_company.getId(), add_company);
 
-       //deleting a production company
-       ProductionCompany deleteCompany = companyFeign.delete_company(update_company.getId());
+        // deleting a production company
+        ProductionCompany deleteCompany = companyFeign.delete_company(update_company.getId());
 
-       //adding a new movie
+        // adding a new movie
         ProductionCompany universal = companyFeign.newProductionCompany(new ProductionCompany("Universal"));
         List<String> movieCategories = Arrays.asList("Action");
         List<Integer> productionCompaniesIds = Arrays.asList(universal.getId());
-        Movie hobbsAndShaw = movieFeign.newMovie(add_user.getIdNumber(),new CreateMovieDto("Hobbs and Shaw", movieCategories, 90, productionCompaniesIds));
+        Movie hobbsAndShaw = movieFeign.newMovie(add_user.getIdNumber(), new CreateMovieDto("Hobbs and Shaw", movieCategories, 90, productionCompaniesIds));
+
+        // update a movie
+        ProductionCompany marvel = companyFeign.newProductionCompany(new ProductionCompany("Marvel"));
+        CreateMovieDto updatedMovie = new CreateMovieDto(hobbsAndShaw.getTitle(), Arrays.asList("Action"), hobbsAndShaw.getRuntime(), Arrays.asList(marvel.getId()));
+        Movie movie = movieFeign.updateMovie(add_user.getIdNumber(), hobbsAndShaw.getId(), updatedMovie);
+
+        // delete a movie
+        movieFeign.deleteMovie(add_user.getIdNumber(), movie.getId());
     }
 }

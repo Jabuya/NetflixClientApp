@@ -3,6 +3,7 @@ package com.cat2client.clientapp.Models;
 import java.util.List;
 
 public class Movie {
+    private long id;
     private String title;
     private String slug;
     private List<Category> category;
@@ -23,6 +24,14 @@ public class Movie {
 
     public Movie(){
 
+    }
+
+    public long getId() {
+        return id;
+    }
+
+    public void setId(long id) {
+        this.id = id;
     }
 
     public String getTitle() {
